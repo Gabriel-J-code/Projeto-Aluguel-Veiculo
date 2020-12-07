@@ -187,4 +187,66 @@ public class LojasRepository {
         }
         return false;
     }
+
+    // Aluguel
+
+    public Aluguel saveAluguel(Aluguel aluguel) {
+        importLojas();
+        Loja loja = findByCnpj(aluguel.getCnpjLoja());
+        loja.addAluguel(aluguel);
+        updateDataBase();
+
+        return aluguel;
+    }
+
+    // findAluguelByCnpj
+    public ArrayList<Aluguel> findAlugueisByCnpj(String cnpj) {
+        importLojas();
+        return findByCnpj(cnpj).getAlugueis();
+    }
+
+    // findAluguelById
+    public Aluguel findAluguelById(String id, String cnpj) {
+        importLojas();
+        ArrayList<Aluguel> alugueis = findAlugueisByCnpj(cnpj);
+        for (Aluguel aluguel : alugueis) {
+            if (aluguel.getId().equals(id)) {
+                return aluguel;
+            }
+        }
+        throw new IndexOutOfBoundsException("aluguel nao encontrado");
+    }
+
+    // deleteAluguelById
+    public boolean deleteAluguelById(String id, String cnpj) {
+        importLojas();
+        Loja l = findByCnpj(cnpj);
+        for (Aluguel a : l.getAlugueis()) {
+            if (a.getId().equals(id)) {
+                l.removeAluguel(a);
+                updateDataBase();
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // findAluguelByCpf
+    public ArrayList<Aluguel> findAlugueisByCpf(String cpf, String cnpj) {
+        importLojas();
+        Loja l = findByCnpj(cnpj);
+        ArrayList<Aluguel> retorno = new ArrayList<Aluguel>();
+        for (Aluguel alu : l.getAlugueis()) {
+            if (alu.getCpfCliente().equals(cpf)) {
+                retorno.add(alu);
+            }
+        }
+        return retorno;
+    }
+
+    public void deleteAll() {
+
+        this.lojas = new ArrayList<Loja>();
+        updateDataBase();
+    }
 }
