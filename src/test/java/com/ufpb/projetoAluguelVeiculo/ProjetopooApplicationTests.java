@@ -1,4 +1,4 @@
-package com.ufpb.projetopoo;
+package com.ufpb.projetoAluguelVeiculo;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
