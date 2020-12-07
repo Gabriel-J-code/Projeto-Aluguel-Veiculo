@@ -1,13 +1,13 @@
-package com.ufpb.projetoAluguelVeiculo.Projeto.Aluguel.Veiculo;
+package com.ufpb.projetopoo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjetoAluguelVeiculoApplication {
+public class ProjetopooApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(ProjetoAluguelVeiculoApplication.class, args);
+		SpringApplication.run(ProjetopooApplication.class, args);
 	}
 
 }
