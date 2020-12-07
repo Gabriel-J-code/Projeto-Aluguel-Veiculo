@@ -15,7 +15,7 @@ import java.util.Scanner;
 import com.ufpb.projetoAluguelVeiculo.entities.Loja;
 
 public class LojasRepository {
-    private static final String LOJA_DATABASE_URL = "src/main/java/com/ufpb/projetopoo/repositories/loja_database.txt";
+    private static final String LOJA_DATABASE_URL = "src/main/java/com/ufpb/projetoAluguelVeiculo/utils/loja_database.txt";
     private ArrayList<Loja> lojas;
 
     public LojasRepository() {
@@ -80,7 +80,7 @@ public class LojasRepository {
     }
 
     // Cliente métodos
-    
+
     public Cliente saveCliente(Cliente cliente, String cnpj) {
         importLojas();
         Gson gson = new Gson();
