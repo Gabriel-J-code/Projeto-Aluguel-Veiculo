@@ -152,7 +152,97 @@ public class TesteLojas {
     private String TEXTO_ESPERADO_LOJA_CEP_INVALIDO = "loja Loja1 sem cep.";
     private String TEXTO_ESPERADO_LOJA_NUMERO_INVALIDO = "loja Loja1 sem numero.";
 
-    
+    @Test
+    public void validarNomeLojaInvalido() {
+        // zerar_database(), ou reiniciar pra um estado// >>criar esse metodo<<
+        Loja lojaNomeVazio = lojaCompleta1;
+        lojaNomeVazio.setNome("");
+        validarLoja(TEXTO_ESPERADO_LOJA_NOME_INVALIDO, lojaNomeVazio);
+
+        Loja lojaNomeNulo = lojaCompleta1;
+        lojaNomeNulo.setNome(null);
+        validarLoja(TEXTO_ESPERADO_LOJA_NOME_INVALIDO, lojaNomeNulo);
+    }
+
+    @Test
+    public void validarCnpjLojaInvalido() {
+        // zerar_database(), ou reiniciar pra um estado// >>criar esse metodo<<
+        Loja lojaCnpjVazio = lojaCompleta1;
+        lojaCnpjVazio.setCnpj("");
+        validarLoja(TEXTO_ESPERADO_LOJA_CNPJ_INVALIDO, lojaCnpjVazio);
+
+        Loja lojaCnpjNulo = lojaCompleta1;
+        lojaCnpjNulo.setCnpj(null);
+        validarLoja(TEXTO_ESPERADO_LOJA_CNPJ_INVALIDO, lojaCnpjNulo);
+    }
+
+    @Test
+    public void validarIeLojaInvalido() {
+        // zerar_database(), ou reiniciar pra um estado// >>criar esse metodo<<
+        Loja lojaIeVazio = lojaCompleta1;
+        lojaIeVazio.setIe("");
+        validarLoja(TEXTO_ESPERADO_LOJA_IE_INVALIDO, lojaIeVazio);
+
+        Loja lojaIeNulo = lojaCompleta1;
+        lojaIeNulo.setIe(null);
+        validarLoja(TEXTO_ESPERADO_LOJA_IE_INVALIDO, lojaIeNulo);
+    }
+
+    @Test
+    public void validarCepLojaInvalido() {
+        // zerar_database(), ou reiniciar pra um estado// >>criar esse metodo<<
+        Loja lojaCepVazio = lojaCompleta1;
+        lojaCepVazio.setCep("");
+        validarLoja(TEXTO_ESPERADO_LOJA_CEP_INVALIDO, lojaCepVazio);
+
+        Loja lojaCepNulo = lojaCompleta1;
+        lojaCepNulo.setCep(null);
+        validarLoja(TEXTO_ESPERADO_LOJA_CEP_INVALIDO, lojaCepNulo);
+    }
+
+    @Test
+    public void validarNumeroLojaInvalido() {
+        // zerar_database(), ou reiniciar pra um estado// >>criar esse metodo<<
+        Loja lojaNumeroVazio = lojaCompleta1;
+        lojaNumeroVazio.setNumero("");
+        validarLoja(TEXTO_ESPERADO_LOJA_NUMERO_INVALIDO, lojaNumeroVazio);
+
+        Loja lojaNumeroNulo = lojaCompleta1;
+        lojaNumeroNulo.setNumero(null);
+        validarLoja(TEXTO_ESPERADO_LOJA_NUMERO_INVALIDO, lojaNumeroNulo);
+    }
+
+    // get loja
+    @Test
+    public void verificarGetLoja() {
+        // zerar_database(), ou reiniciar pra um estado// >>criar esse metodo<<
+        ls.deletarLojas();
+        ls.deleteLoja(CNPJ_LOJA1);
+        Gson gson = new Gson();
+        Loja lojaGetLoja = ls.adicionarLoja(lojaCompleta1);
+        String loja1Gson = gson.toJson(lojaGetLoja);
+        String esperado = gson.toJson(ls.getLoja(lojaGetLoja.getCnpj()));
+        assertEquals(esperado, loja1Gson);
+        ls.deleteLoja(lojaGetLoja.getCnpj());
+    }
+
+    // todasAsLojas
+    private ArrayList<Loja> LOJAS_TESTE = arrToArrayList(lojaCompleta1, lojaCompleta2);
+
+    @Test
+    public void validarGetLojas() {
+        ls.deletarLojas();
+        ls.adicionarLoja(lojaCompleta1);
+        ls.adicionarLoja(lojaCompleta2);
+        ArrayList<Loja> lojas = ls.todasAsLojas();
+
+        Gson gson = new Gson();
+        String testeLojaJson = gson.toJson(LOJAS_TESTE);
+        String lojasJson = gson.toJson(lojas);
+
+        assertEquals(testeLojaJson, lojasJson);
+
+    }
     
     // ClientesService
 
