@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-ProjetopooApplication<ProjetoAluguelVeiculo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "console": "internalConsole",
+            "mainClass": "com.ufpb.projetoAluguelVeiculo.ProjetopooApplication",
+            "projectName": "ProjetoAluguelVeiculo",
+            "args": ""
+        }
+    ]
+}

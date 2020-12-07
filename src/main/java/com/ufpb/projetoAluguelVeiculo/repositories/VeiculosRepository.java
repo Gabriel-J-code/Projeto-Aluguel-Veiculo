@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 
 public class VeiculosRepository {
-    private static final String VEICULO_DATABASE_URL = "src/main/java/com/ufpb/projetopoo/repositories/veiculo_database.txt";
+    private static final String VEICULO_DATABASE_URL = "src/main/java/com/ufpb/projetoAluguelVeiculo/utils/veiculo_database.txt";
     private ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
 
     public VeiculosRepository() {
