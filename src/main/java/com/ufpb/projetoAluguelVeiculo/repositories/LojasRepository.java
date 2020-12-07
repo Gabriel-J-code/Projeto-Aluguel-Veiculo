@@ -79,6 +79,57 @@ public class LojasRepository {
         } catch (Exception e) { }
     }
 
+    // Lojas
+
+    public Loja save(Loja loja) {
+        importLojas();
+        if (!isDuplicadoLoja(loja)) {
+            this.lojas.add(loja);
+
+            updateDataBase();
+            return loja;
+        }
+        throw new IndexOutOfBoundsException("Loja já cadastrada no sistema.");
+    }
+
+    public ArrayList<Loja> findAll() {
+        importLojas();
+        return this.lojas;
+    }
+
+    
+
+    public Loja findByCnpj(String cnpj) {
+        importLojas();
+        for (Loja item : lojas) {
+            if (item.getCnpj().equals(cnpj))
+                return item;
+        }
+        throw new IndexOutOfBoundsException("cnpj não encontrado.");
+    }
+
+    private boolean isDuplicadoLoja(Loja loja) {
+        importLojas();
+        for (Loja item : this.lojas) {
+            if (loja.getCnpj().equals(item.getCnpj())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean deleteByCNPJ(String cnpj) {
+        importLojas();
+        for (Loja loja : this.lojas) {
+            if (loja.getCnpj().equals(cnpj)) {
+                this.lojas.remove(loja);
+                updateDataBase();
+                return true;
+            }
+        }
+        return false;
+    }
+
     // Cliente métodos
     
     public Cliente saveCliente(Cliente cliente, String cnpj) {
