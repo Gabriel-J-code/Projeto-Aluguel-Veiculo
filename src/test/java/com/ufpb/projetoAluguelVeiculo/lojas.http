@@ -1,0 +1,55 @@
+
+//----------- ROTAS DA LOJA ----------- 
+
+
+# Criar uma nova loja
+POST http://localhost:8080/v1/api/loja
+Content-Type: application/json
+
+{
+    "nome": "Alugue-me",
+    "cnpj": "39.040.100/0001-87",
+    "ie": "30003831-3",
+    "cep": "58302-475",
+    "numero": "001"
+}
+
+###
+
+#----- Listar lojas cadastradas
+
+GET http://localhost:8080/v1/api/lojas
+Content-Type: application/json
+
+#------
+
+###
+
+#----- Adicionar novo cliente a loja
+
+POST http://localhost:8080/v1/api/loja/clientes/cadastrar
+Content-Type: application/json
+
+{
+    "cnpjLoja":"39.040.100/0001-87",
+    "nome": "Sr.Oracio Imorais",
+    "cpf": "452.868.034-31",
+    "email": "Oracio@gmail.com",
+    "telefone": "(83) 99999-9999"
+}
+
+#-----
+
+###
+
+#----- Listar clientes de loja
+GET http://localhost:8080/v1/api/loja/clientes/listar
+Content-Type: application/json
+
+{
+    "cnpj" : "39.040.100/0001-87"
+}
+
+#----- 
+
+###
