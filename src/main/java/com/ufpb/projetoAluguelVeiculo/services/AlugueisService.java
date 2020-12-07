@@ -6,6 +6,9 @@ import com.ufpb.projetoAluguelVeiculo.entities.Aluguel;
 import com.ufpb.projetoAluguelVeiculo.repositories.LojasRepository;
 import com.ufpb.projetoAluguelVeiculo.utils.Static;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class AlugueisService {
   private LojasRepository lr;
 
