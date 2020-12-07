@@ -1,4 +1,4 @@
-        package com.ufpb.projetopoo.repositories;
+package com.ufpb.projetoAluguelVeiculo.repositories;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -7,11 +7,11 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
+import com.ufpb.projetoAluguelVeiculo.entities.Veiculo;
 
 import java.util.Scanner;
 
-import com.ufpb.projetopoo.entities.ModeloVeiculo;
-import com.ufpb.projetopoo.entities.Veiculo;
+
 
 public class VeiculoRepository {
     private static final String VEICULO_DATABASE_URL = "src/main/java/com/ufpb/projetopoo/repositories/veiculo_database.txt";
@@ -90,12 +90,4 @@ public class VeiculoRepository {
         } catch (Exception e) {
         }
     }
-
-    // public static void main(String[] args) {
-    //     VeiculoRepository tetes = new VeiculoRepository();
-    //     ModeloVeiculo m1 = new ModeloVeiculo("jetpack", "futurista", 150.0);
-    //     Veiculo v1 = new Veiculo("7", m1);
-    //     tetes.addVeiculo(v1);
-    // }
-
 }
