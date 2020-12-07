@@ -1,4 +1,4 @@
-package com.ufpb.projetopoo;
+package com.ufpb.projetoAluguelVeiculo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
