@@ -1,11 +1,15 @@
 package com.ufpb.projetoAluguelVeiculo.utils;
 
 import java.util.Base64;
-
+import java.io.FileWriter;
 import org.joda.time.DateTime;
 import org.joda.time.Minutes;
 
 public class Static {
+
+    private static final String LOJA_DATABASE_URL = "src/main/java/com/ufpb/projetopoo/repositories/loja_database.txt";
+    public static final String LN = System.lineSeparator();
+
     /**
      * input model "11/11/1111 11:11"
      * 
@@ -62,4 +66,16 @@ public class Static {
         return false;
     }
 
+    public static String fixed2f(double dinheiro) {
+        return String.format("%.2f", dinheiro).replace(",", ".");
+    }
+
+    public static void cleanData() {
+        try {
+            FileWriter dataToSave = new FileWriter(LOJA_DATABASE_URL);
+            dataToSave.write("");
+            dataToSave.close();
+        } catch (Exception e) {
+        }
+    }
 }
