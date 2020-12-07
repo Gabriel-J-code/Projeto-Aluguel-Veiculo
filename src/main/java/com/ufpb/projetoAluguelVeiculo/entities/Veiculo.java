@@ -36,13 +36,4 @@ public class Veiculo {
         return gson.toJson(this);
     }
 
-    // public String toVeiculo() {
-
-    // }
-
-    /*
-     * public static void main(String[] args) { Veiculo veiculo = new Veiculo("00",
-     * new ModeloVeiculo("bike", "adventure", 3.0));
-     * System.out.println(veiculo.toJson()); }
-     */
 }
