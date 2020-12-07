@@ -28,6 +28,7 @@ public class Static {
 
         return retorno;
     }
+    
 
     public static int numHorasParaPagamento(int minutos) {
         int horas = minutos / 60;
@@ -53,5 +54,12 @@ public class Static {
         return new String(decoded);
     }
 
+    public static boolean isEmpty(String s) {
+        if (s == null)
+            return true;
+        if (s.equals(""))
+            return true;
+        return false;
+    }
 
 }
