@@ -5,6 +5,8 @@ import com.ufpb.projetoAluguelVeiculo.DTO.ClienteDTO;
 import com.ufpb.projetoAluguelVeiculo.DTO.CnpjDTO;
 import com.ufpb.projetoAluguelVeiculo.entities.Cliente;
 import com.ufpb.projetoAluguelVeiculo.services.ClientesService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,13 +23,17 @@ import org.springframework.web.client.HttpStatusCodeException;
 @RequestMapping("/api/loja/clientes")
 public class ClientesController {
 
-    private ClientesService clientes_service;
-
-    public ClientesController() {
+    private ClientesService clientes_service;  
+    
+    public ClientesController(){
         this.clientes_service = new ClientesService();
     }
+    @Autowired
+    public ClientesController(ClientesService clientesService) {
+        this.clientes_service = clientesService;
+	}
 
-    @PostMapping("/cadastrar")
+	@PostMapping("/cadastrar")
     public ResponseEntity<Cliente> adicionarCliente(@RequestBody ClienteDTO cliente) {
         try {
             Cliente clienteMap = new Cliente(cliente.getNome(), cliente.getCpf(), cliente.getEmail(),

@@ -13,20 +13,23 @@ import com.ufpb.projetoAluguelVeiculo.entities.Veiculo;
 import com.ufpb.projetoAluguelVeiculo.services.AlugueisService;
 import com.ufpb.projetoAluguelVeiculo.services.ClientesService;
 import com.ufpb.projetoAluguelVeiculo.services.LojasService;
+import com.ufpb.projetoAluguelVeiculo.utils.ServicesInitForTest;
 import com.ufpb.projetoAluguelVeiculo.utils.Static;
 
 import org.junit.jupiter.api.Test;
 
 public class TesteLojas {
-
+    
+    private ServicesInitForTest sInitForTest;
     private LojasService ls;
     private ClientesService cs;
     private AlugueisService as;
 
     public TesteLojas() {
-        this.ls = new LojasService();
-        this.cs = new ClientesService();
-        this.as = new AlugueisService();
+        this.sInitForTest = new ServicesInitForTest();        
+        this.ls = sInitForTest.getLojasService();
+        this.cs = sInitForTest.getClientesService();
+        this.as = sInitForTest.getAlugueisService();
     }
 
     //
@@ -134,15 +137,13 @@ public class TesteLojas {
 
     @Test
     public void criarLoja() {
-        ls.deletarLojas();
+        sInitForTest.cleanRepository();
 
-        Loja loja1 = lojaCompleta1;
-        ls.adicionarLoja(loja1);
-
-        Loja loja2 = lojaCompleta2;
-        ls.adicionarLoja(loja2);
-        ArrayList<Loja> lojasCadastradas = ls.todasAsLojas();
-        assertEquals(2, lojasCadastradas.size());
+        ls.adicionarLoja(lojaCompleta1);
+        ls.adicionarLoja(lojaCompleta2);
+        
+        int totalExperado = 2;
+        assertEquals(totalExperado, ls.todasAsLojas().size());
 
     }
 
@@ -215,8 +216,8 @@ public class TesteLojas {
     // get loja
     @Test
     public void verificarGetLoja() {
-        // zerar_database(), ou reiniciar pra um estado// >>criar esse metodo<<
-        ls.deletarLojas();
+        // zerar_database(), ou reiniciar pra um estado// >>criar esse metodo<<        
+        sInitForTest.cleanRepository();
         ls.deleteLoja(CNPJ_LOJA1);
         Gson gson = new Gson();
         Loja lojaGetLoja = ls.adicionarLoja(lojaCompleta1);
@@ -231,7 +232,7 @@ public class TesteLojas {
 
     @Test
     public void validarGetLojas() {
-        ls.deletarLojas();
+        sInitForTest.cleanRepository();
         ls.adicionarLoja(lojaCompleta1);
         ls.adicionarLoja(lojaCompleta2);
         ArrayList<Loja> lojas = ls.todasAsLojas();
@@ -298,11 +299,11 @@ public class TesteLojas {
     // addClienteLoja
     @Test
     public void testarAdicionarCliente() {
-        ls.deletarLojas();
+        sInitForTest.cleanRepository();
         ls.adicionarLoja(lojaCompleta1);
         String cpfTeste = CPF_CLIENTE;
         cs.adicionarCliente(clienteCompleto, CNPJ_LOJA1);
-        assertEquals(cs.buscarClientePorCpf(
+        assertEquals(cs.buscarPorCpf(
             CPF_CLIENTE, 
             CNPJ_LOJA1
         ).getCpf(), cpfTeste);
@@ -311,7 +312,7 @@ public class TesteLojas {
     // listarClientesPorCnpj
     @Test
     public void testarListagemDeClientesPorCnpj() {
-        ls.deletarLojas();
+        sInitForTest.cleanRepository();
         ls.adicionarLoja(lojaCompleta1);
 
         Cliente c1 = cs.adicionarCliente(clienteCompleto, CNPJ_LOJA1);
@@ -327,7 +328,7 @@ public class TesteLojas {
     // deletarCliente
     @Test
     public void testarDeletarCliente() {
-        ls.deletarLojas();
+        sInitForTest.cleanRepository();
         ls.adicionarLoja(lojaCompleta1);
         String cpfTeste = CPF_CLIENTE;
         cs.adicionarCliente(clienteCompleto, CNPJ_LOJA1);
@@ -390,7 +391,7 @@ public class TesteLojas {
 
     @Test
     public void validarAluguelDeletarByIdInvalido() {
-        ls.deletarLojas();
+        sInitForTest.cleanRepository();
         ls.adicionarLoja(lojaCompleta1);
         as.addAluguel(aluguelCompleto);
         validarDeletarAluguel(TEXTO_ESPERADO_ALUGUEL_ID_INVALIDO, aluguelCompleto);

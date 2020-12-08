@@ -1,93 +1,81 @@
 package com.ufpb.projetoAluguelVeiculo.repositories;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
 import com.ufpb.projetoAluguelVeiculo.entities.Veiculo;
+import com.ufpb.projetoAluguelVeiculo.utils.DataRegister;
 
-import java.util.Scanner;
+import org.springframework.stereotype.Repository;
 
-
-
+@Repository
 public class VeiculosRepository {
-    private static final String VEICULO_DATABASE_URL = "src/main/java/com/ufpb/projetoAluguelVeiculo/utils/veiculo_database.txt";
-    private ArrayList<Veiculo> veiculos = new ArrayList<Veiculo>();
 
-    public VeiculosRepository() {
-        this.importVeiculos();
+    private DataRegister dataRegister;
+
+    private ArrayList<Veiculo> veiculos; 
+    
+    
+    public VeiculosRepository(){
+        this.dataRegister = new DataRegister("src/main/java/com/ufpb/projetoAluguelVeiculo/utils/veiculo_database.txt");
+        this.veiculos = new ArrayList<Veiculo>();
+        recuperarDados();
     }
 
-    private String recoveryData() throws FileNotFoundException {
-        try {
-            BufferedReader myObj = new BufferedReader(new FileReader(VEICULO_DATABASE_URL));
-            Scanner myReader = new Scanner(myObj);
-            String data = "";
-            while (myReader.hasNextLine()) {
-                data += myReader.nextLine() + "\n";
+    public void recuperarDados() {
+        try {   
+            Gson gson = new Gson();             
+            for (String line : dataRegister.recoveryData()) {
+                this.veiculos.add(gson.fromJson(line, Veiculo.class));;                
             }
-
-            myReader.close();
-            return data;
+            
         } catch (FileNotFoundException e) {
-            throw new FileNotFoundException("An error occurred.");
-        }
+        } 
     }
 
-    private void importVeiculos() {
+    protected void saveData() {
+        Gson gson = new Gson();
         try {
-            String jsonImportado = recoveryData();
-            Gson gson = new Gson();
-            Scanner sc = new Scanner(jsonImportado);
-
-            while (sc.hasNextLine()) {
-                this.veiculos.add(gson.fromJson(sc.nextLine(), Veiculo.class));
-            }
-            sc.close();
-        } catch (FileNotFoundException fnfe) {
+            dataRegister.saveData(gson.toJson(veiculos));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-    }
-
-    public ArrayList<Veiculo> getVeiculos() {
-        return veiculos;
-    }
-
-    public Veiculo findByCodigo(String codigo) {
-        for (Veiculo veiculo : this.veiculos) {
-            if (veiculo.getId().equals(codigo)) {
-                return veiculo;
-            }
-        }
-        throw new RuntimeException("Veículo não encontrado.");
     }
 
     public Veiculo addVeiculo(Veiculo veiculo) {
         this.veiculos.add(veiculo);
-        updateDataBase();
+        saveData();
         return veiculo;
     }
 
-    private void updateDataBase() {
+    public ArrayList<Veiculo> findAll(){
+        return veiculos;
+    }
+
+    public Veiculo findById(String id){
+        for(Veiculo v : findAll()){
+            if (v.getId().equals(id)){
+                return v;
+            }
+        }
+        throw new IndexOutOfBoundsException();
+    }
+
+    public boolean deletarVeiculo(Veiculo veiculo){
         Gson gson = new Gson();
-
-        StringBuilder sb = new StringBuilder();
-
-        for (Veiculo v : this.veiculos) {
-            sb.append(gson.toJson(v) + "\n");
+        for (Veiculo v : veiculos) {
+            if (gson.toJson(v).equals(gson.toJson(veiculo))){
+                this.veiculos.remove(v);
+                return true;
+            }
         }
-        saveData(sb.toString());
+        return false;
     }
 
-    private void saveData(String json) {
-        try {
-            FileWriter dataToSave = new FileWriter(VEICULO_DATABASE_URL);
-            dataToSave.write(json);
-            dataToSave.close();
-        } catch (Exception e) {
-        }
-    }
+	public void setPath(String pathVeiculos) {
+        this.dataRegister = new DataRegister(pathVeiculos);
+	}
+
 }

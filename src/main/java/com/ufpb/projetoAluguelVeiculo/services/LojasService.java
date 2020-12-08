@@ -10,15 +10,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class LojasService {
+
     private LojasRepository lr;
 
-    public LojasService() {
-        this.lr =  new LojasRepository();
+    public LojasService(){
+        this.lr = new LojasRepository();
     }
 
+	public LojasService(LojasRepository lojasRepository) {
+        this.lr = lojasRepository;
+    }
     public Loja adicionarLoja(Loja loja) {
         validarLoja(loja);
-        Loja lojaSalva = lr.save(loja);
+        Loja lojaSalva = lr.saveLoja(loja);
         return lojaSalva;     
     }
 
@@ -47,8 +51,5 @@ public class LojasService {
     public boolean deleteLoja(String cnpj){
         return lr.deleteByCNPJ(cnpj);
     }
-
-    public void deletarLojas() {
-        lr.deleteAll();
-    }
+    
 }

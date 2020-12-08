@@ -1,0 +1,7 @@
+{"id":"1","modeloVeiculo":{"tipo":"Bicicleta","modelo":"Casual","valorHora":6.7}}
+{"id":"2","modeloVeiculo":{"tipo":"Bicicleta","modelo":"Adventure","valorHora":8.5}}
+{"id":"3","modeloVeiculo":{"tipo":"Patins","modelo":"Duas rodas","valorHora":8.4}}
+{"id":"4","modeloVeiculo":{"tipo":"Patins","modelo":"Quatro rodas","valorHora":11.8}}
+{"id":"5","modeloVeiculo":{"tipo":"Skate","modelo":"Street","valorHora":6.3}}
+{"id":"6","modeloVeiculo":{"tipo":"Skate","modelo":"Vertical","valorHora":7.3}}
+{"id":"7","modeloVeiculo":{"tipo":"jetpack","modelo":"futurista","valorHora":150.0}}

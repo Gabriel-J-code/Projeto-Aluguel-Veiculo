@@ -11,6 +11,8 @@ import com.ufpb.projetoAluguelVeiculo.entities.Aluguel;
 import com.ufpb.projetoAluguelVeiculo.entities.Veiculo;
 import com.ufpb.projetoAluguelVeiculo.services.AlugueisService;
 import com.ufpb.projetoAluguelVeiculo.services.VeiculosService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,14 +33,19 @@ import org.springframework.web.client.HttpStatusCodeException;
 public class AlugueisController {
     private AlugueisService alugueis_service;
 
-    private VeiculosService veiculos_service;
+    private VeiculosService veiculos_service;    
 
     public AlugueisController() {
         this.alugueis_service = new AlugueisService();
         this.veiculos_service = new VeiculosService();
     }
+    @Autowired
+    public AlugueisController(AlugueisService alugueisService, VeiculosService veiculosService) {
+        this.alugueis_service = alugueisService;
+        this.veiculos_service = veiculosService;
+	}
 
-    @GetMapping("/alugueis")
+	@GetMapping("/alugueis")
     public ResponseEntity<ArrayList<Aluguel>> listarAlugueis(@RequestBody CnpjDTO cnpj) {
         try {
             return new ResponseEntity<>(alugueis_service.listaAlugueisDaLoja(cnpj.getCnpj()), HttpStatus.OK);
