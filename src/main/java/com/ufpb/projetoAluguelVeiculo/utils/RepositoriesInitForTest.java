@@ -3,7 +3,6 @@ package com.ufpb.projetoAluguelVeiculo.utils;
 import java.util.ArrayList;
 
 import com.ufpb.projetoAluguelVeiculo.entities.Loja;
-import com.ufpb.projetoAluguelVeiculo.entities.Veiculo;
 import com.ufpb.projetoAluguelVeiculo.repositories.AlugueisRepository;
 import com.ufpb.projetoAluguelVeiculo.repositories.ClientesRepository;
 import com.ufpb.projetoAluguelVeiculo.repositories.LojasRepository;

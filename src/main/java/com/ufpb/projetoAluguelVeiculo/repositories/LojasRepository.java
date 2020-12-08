@@ -14,19 +14,19 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class LojasRepository {
 
-    private DataRegister dataRegister;
+    private static DataRegister dataRegister;
 
     private static ArrayList<Loja> lojas;
 
     public LojasRepository() {
-        this.dataRegister = new DataRegister("src/main/java/com/ufpb/projetoAluguelVeiculo/utils/loja_database.txt");
-        this.lojas = new ArrayList<Loja>();
+        dataRegister = new DataRegister("src/main/java/com/ufpb/projetoAluguelVeiculo/utils/loja_database.txt");
+        lojas = new ArrayList<Loja>();
         recuperarDados();
     }
     
     public LojasRepository(String pathLojas) {
-        this.dataRegister = new DataRegister(pathLojas);
-        this.lojas = new ArrayList<Loja>();
+        dataRegister = new DataRegister(pathLojas);
+        lojas = new ArrayList<Loja>();
         recuperarDados();
     }
 
@@ -34,7 +34,7 @@ public class LojasRepository {
         Gson gson = new Gson();
         try {
             StringBuilder save = new StringBuilder();
-            for (Loja loja : this.lojas){
+            for (Loja loja : lojas){
                 save.append(gson.toJson(loja));
 
             }
@@ -46,7 +46,7 @@ public class LojasRepository {
 
     public Loja saveLoja(Loja loja) {
         if (!isDuplicadoLoja(loja)) {
-            this.lojas.add(loja);
+            lojas.add(loja);
 
             saveData();
             return loja;
@@ -60,7 +60,7 @@ public class LojasRepository {
             gson.fieldNamingStrategy();          
             for (String line : dataRegister.recoveryData()) {
                 Loja aux = gson.fromJson(line,Loja.class);
-                this.lojas.add(aux);                
+                lojas.add(aux);                
             }
             
         } catch (FileNotFoundException e) {
@@ -84,7 +84,7 @@ public class LojasRepository {
     }
 
     private boolean isDuplicadoLoja(Loja loja) {
-        for (Loja item : this.lojas) {
+        for (Loja item : lojas) {
             if (loja.getCnpj().equals(item.getCnpj())) {
                 return true;
             }
@@ -93,9 +93,9 @@ public class LojasRepository {
     }
 
     public boolean deleteByCNPJ(String cnpj) {
-        for (Loja loja : this.lojas) {
+        for (Loja loja : lojas) {
             if (loja.getCnpj().equals(cnpj)) {
-                this.lojas.remove(loja);
+                lojas.remove(loja);
                 saveData();
                 return true;
             }
@@ -104,7 +104,7 @@ public class LojasRepository {
     }
 
 	public void setPath(String pathLojas) {
-        this.dataRegister = new DataRegister(pathLojas);
+        dataRegister = new DataRegister(pathLojas);
 	}
 
 
