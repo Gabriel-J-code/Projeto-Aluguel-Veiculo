@@ -1,6 +1,7 @@
 # Projeto-Aluguel-Veiculo
  
 Projeto da 2 unidade da disciplina de programação orientada a objetos
+
 curso de ciência da computação - UFPB
 
 > _Objetivo: ilustrar uma organização de código em Java usando boas práticas e conceitos da orientação a objetos_.
@@ -23,13 +24,13 @@ antes de tudo é necessario instalar o java
 
 você pode baixar o java e todo seu embiente de desenvolvimento seguindo:
 
-- Para ambientes Windows você pode seguir as instruções de instalação neste site:
+-- Para ambientes Windows você pode seguir as instruções de instalação neste site:
 
-`https://www.java.com/pt-BR/download/help/windows_manual_download.html`
+`- https://www.java.com/pt-BR/download/help/windows_manual_download.html`
 
-- Para ambientes linux como o ubuntu basta executar o seguinte comando em seu terminal:
+-- Para ambientes linux como o ubuntu basta executar o seguinte comando em seu terminal:
 
-`sudo apt install oracle-java14-installer`
+`- sudo apt install oracle-java14-installer`
 
 Pré-requisitos
 
@@ -37,7 +38,9 @@ para facilitar o teste desta aplicação, recomendamos usar o vscode e suas segu
 
 ```
 -> Java Extension Pack
+```
 
+```
 -> REST Client
 ```
 
@@ -50,7 +53,9 @@ A segunda extensão irá ajuda-lo possibilitando que você teste as rotas de nos
 ### Autores
 
 `Gabriel de Jesus`
+
 `Rodolfo Alves`
+
 `Whendel Morais`
 
 ### Licença
