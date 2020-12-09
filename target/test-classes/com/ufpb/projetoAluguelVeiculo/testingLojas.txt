@@ -1,0 +1,1 @@
+{"nome":"Loja1","cnpj":"cnpj1","ie":"ie1","cep":"99999-999","numero":"s/n","alugueis":[],"clientes":[]}

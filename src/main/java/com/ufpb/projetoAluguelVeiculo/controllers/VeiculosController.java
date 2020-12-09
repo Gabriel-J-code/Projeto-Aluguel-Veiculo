@@ -3,6 +3,8 @@ package com.ufpb.projetoAluguelVeiculo.controllers;
 import java.util.ArrayList;
 import com.ufpb.projetoAluguelVeiculo.entities.Veiculo;
 import com.ufpb.projetoAluguelVeiculo.services.VeiculosService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,12 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class VeiculosController {
     private VeiculosService vs;
-
-    public VeiculosController() {
+    
+    public VeiculosController(){
         this.vs = new VeiculosService();
     }
 
-    @GetMapping("/veiculos")
+    @Autowired
+    public VeiculosController(VeiculosService veiculosService) {
+        this.vs = veiculosService;
+	}
+
+	@GetMapping("/veiculos")
     public ResponseEntity<ArrayList<Veiculo>> veiculosDisponiveis() {
         return new ResponseEntity<>(vs.listarVeiculos(), HttpStatus.OK);
     }

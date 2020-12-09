@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import com.ufpb.projetoAluguelVeiculo.DTO.CnpjDTO;
 import com.ufpb.projetoAluguelVeiculo.entities.Loja;
 import com.ufpb.projetoAluguelVeiculo.services.LojasService;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,13 +19,17 @@ import org.springframework.web.client.HttpStatusCodeException;
 @RestController
 @RequestMapping("/api")
 public class LojasController {
-    private LojasService ls;
+    private LojasService ls;   
 
-    public LojasController() {
+    public LojasController(){
         this.ls = new LojasService();
     }
+    @Autowired
+    public LojasController(LojasService lojasService) {
+        this.ls = lojasService;
+	}
 
-    @PostMapping("/loja")
+	@PostMapping("/loja")
     public ResponseEntity<Loja> adicionarLoja(@RequestBody Loja loja) {
         try {
             return new ResponseEntity<>(ls.adicionarLoja(loja), HttpStatus.CREATED);

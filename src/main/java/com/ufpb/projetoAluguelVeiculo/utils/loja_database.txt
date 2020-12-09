@@ -1,1 +1,1 @@
-{"nome":"Loja1","cnpj":"cnpj1","ie":"ie1","cep":"99999-999","numero":"s/n","alugueis":[],"clientes":[]}
+{"nome":"Alugue-me","cnpj":"39.040.100/0001-87","ie":"30003831-3","cep":"58302-475","numero":"001","alugueis":[],"clientes":[{"nome":"Sr.Oracio Imorais","cpf":"452.868.034-31","email":"Oracio@gmail.com","telefone":"(83) 99999-9999"}]}

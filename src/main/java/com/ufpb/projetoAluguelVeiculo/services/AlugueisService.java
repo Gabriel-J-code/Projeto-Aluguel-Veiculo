@@ -3,31 +3,35 @@ package com.ufpb.projetoAluguelVeiculo.services;
 import java.util.ArrayList;
 
 import com.ufpb.projetoAluguelVeiculo.entities.Aluguel;
-import com.ufpb.projetoAluguelVeiculo.repositories.LojasRepository;
+import com.ufpb.projetoAluguelVeiculo.repositories.AlugueisRepository;
 import com.ufpb.projetoAluguelVeiculo.utils.Static;
 
 import org.springframework.stereotype.Service;
 
 @Service
 public class AlugueisService {
-  private LojasRepository lr;
-
+    private AlugueisRepository ar;
+    
     public AlugueisService() {
-        this.lr = new LojasRepository();
-    }
+		this.ar = new AlugueisRepository();
+	}
 
-    public Aluguel addAluguel(Aluguel aluguel) {
+	public AlugueisService(AlugueisRepository alugueisRepository) {
+		this.ar = alugueisRepository;
+	}
+
+	public Aluguel addAluguel(Aluguel aluguel) {
         validarAluguel(aluguel);
-        return lr.saveAluguel(aluguel);
+        return ar.saveAluguel(aluguel);
     }
 
     public Aluguel getAluguel(String id, String cnpj) {
-        return lr.findAluguelById(id, cnpj);
+        return ar.findById(id, cnpj);
     }
 
     public ArrayList<Aluguel> listaAlugueisDaLoja(String cnpj) {
         try {
-            ArrayList<Aluguel> alugueisDaLoja = lr.findAlugueisByCnpj(cnpj);
+            ArrayList<Aluguel> alugueisDaLoja = ar.findByCnpj(cnpj);
             return alugueisDaLoja;
         } catch (IndexOutOfBoundsException ioobe) {
             throw new RuntimeException();
@@ -35,7 +39,7 @@ public class AlugueisService {
     }
 
     public ArrayList<Aluguel> listarAlugueisPorCpf(String cpf, String cnpj) {
-        ArrayList<Aluguel> encontrados = lr.findAlugueisByCpf(cpf, cnpj);
+        ArrayList<Aluguel> encontrados = ar.findByCpf(cpf, cnpj);
         return encontrados;
     }
 
@@ -53,7 +57,7 @@ public class AlugueisService {
     }
 
     public Boolean deletarAluguel(String id, String cnpj) {
-        return lr.deleteAluguelById(id, cnpj);
+        return ar.deleteById(id, cnpj);
     }
 
     public Double pagarAluguel(String id, String cnpj, Double valorRecebido) {
@@ -68,4 +72,5 @@ public class AlugueisService {
         }
         throw new RuntimeException("Aluguel não existe.");
     }
+
 }
